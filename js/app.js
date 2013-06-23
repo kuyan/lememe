@@ -1,5 +1,5 @@
 var font_list = $('#meme-fonts > li'),
-	active_meme, active_font = font_list.filter('.active')[0].children[0].getAttribute('data-font'),
+	active_meme, active_font = 'Impact',
 	color1 = $('#color1'),
 	color2 = $('#color2'),
 	font_label = $('#label-active-font'),
