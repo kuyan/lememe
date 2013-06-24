@@ -1,5 +1,4 @@
-var font_list = $('#meme-fonts > li'),
-	active_meme, active_font = 'Impact',
+var active_meme, active_font = 'Impact',
 	color1 = $('#color1'),
 	color2 = $('#color2'),
 	font_label = $('#label-active-font'),
@@ -147,17 +146,7 @@ function swap_active_meme(e) {
 }
 
 function swap_active_font(e) {
-	font_list.each(function(i, el) {
-		if (e.target.parentNode != el) {
-			el.className = '';
-		} else {
-			el.className = 'active';
-			active_font = el.children[0].getAttribute('data-font');
-			font_label.text($(el.children[0]).text());
-		}
-	});
 	draw();
-	e.preventDefault();
 }
 
 function image_uploaded(data) {
@@ -218,7 +207,6 @@ function register_events() {
 	$([top_input[0], bottom_input[0]]).on('keyup', draw);
 	$('#btn-meme-list').on('click', toggle_meme_list);
 	meme_list_container.find('li:not(.nav-header)').on('click', swap_active_meme);
-	font_list.on('click', swap_active_font);
 	generate.on('click', generate_meme);
 
 	/* quick and dirty disable form submission */
