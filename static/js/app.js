@@ -110,23 +110,6 @@ function draw() {
 	}
 }
 
-function persist_settings() {
-	//if( is_persistent.is(':checked') ) {
-	//store_data({
-	//'active_meme': active_meme,
-	//'active_font': active_font,
-	//'color1': color1.val(),
-	//'color2': color2.val(),
-	//'font_size': font_size.val(),
-	//'outline_size': outline_size.val(),
-	//'top_input': top_input.val(),
-	//'bottom_input': bottom_input.val()
-	//});
-	//} else {
-	//remove_data();
-	//}
-}
-
 function swap_active_meme(e) {
 	$('#btn-meme-list').trigger('click'); // always close the menu
 	if ($(this).is('.active')) {
@@ -214,12 +197,11 @@ function register_events() {
 		e.preventDefault();
 		return false;
 	});
-	//Persist settings before closing tab
-	$(window).on("beforeunload", persist_settings); /* color picker init */
+
 	$('input[type=color]').spectrum({
 		showButtons: false,
 		showInput: true,
-		change: function(tinycolor) { draw(); },
+		change: function(tinycolor) { draw(); }
 	});
 
 	$('input[data-slider]').on('slide', draw);
@@ -283,31 +265,7 @@ function register_events() {
 
 function init() {
 	register_events();
-	var data = false; //get_data();
-	if (data) {
-		active_meme = data.active_meme;
-		active_font = data.active_font;
-		color1.miniColors('value', data.color1);
-		color2.miniColors('value', data.color2);
-		font_size.val(data.font_size);
-		outline_size.val(data.outline_size);
-		top_input.val(data.top_input);
-		bottom_input.val(data.bottom_input);
-		protip = data.protip;
-		var active_meme_item = meme_list_container.filter(function() {
-			return $(this.children[0]).data('img') === active_meme;
-		});
-		var active_font_item = font_list.filter(function() {
-			return $(this.children[0]).data('font') === active_font;
-		});
-		font_label.text(active_font_item.children().text());
-		$(meme_list_container.children('li')).add(font_list).removeClass("active");
-		$(active_meme_item).add(active_font_item).addClass("active");
-		is_persistent.attr("checked", "checked");
-
-	} else {
-		active_meme = meme_list_container.find('li.active > a').data('img');
-	}
+	active_meme = meme_list_container.find('li.active > a').data('img');
 
 	img_is_loaded = false;
 	img.src = PATH + active_meme;
@@ -318,4 +276,5 @@ function init() {
 
 	setTimeout(draw, 200); // hack fix
 }
+
 init();
