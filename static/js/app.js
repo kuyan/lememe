@@ -168,11 +168,9 @@ function filter_list(text) {
 }
 
 function register_events() {
-	$([top_input[0], bottom_input[0]]).on('keyup', draw);
-
-	meme_list_container.on('change', swap_active_meme);
-
-	generate.on('click', generate_meme);
+	$([top_input[0], bottom_input[0]]).on('keyup', draw); // Redraw if meme text modified.
+	meme_list_container.on('change', swap_active_meme); // Redraw if active meme switched.
+	generate.on('click', generate_meme); // Generate meme on generate button click
 
 	/* quick and dirty disable form submission */
 	$('.nosubmit-form').submit(function(e) {
@@ -185,18 +183,6 @@ function register_events() {
 		showButtons: false,
 		showInput: true,
 		change: function(tinycolor) { draw(); }
-	});
-
-	$('input[data-slider]').on('slide', draw);
-	$('input[data-slider]').on('input', draw);
-
-	$('#btn-clear-filter').on('click', function() {
-		$('#meme-filter').val('');
-		filter_list();
-	});
-
-	$('#meme-filter').on('keyup', function() {
-		filter_list(jQuery.trim(this.value));
 	});
 
 	$(document).on('dragover', function(e) {
