@@ -217,8 +217,6 @@ function register_events() {
 		filter_list(jQuery.trim(this.value));
 	});
 
-	$('.info-popover').popover();
-
 	$(document).on('dragover', function(e) {
 		e.preventDefault();
 		return false;
