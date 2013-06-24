@@ -228,11 +228,12 @@ function register_events() {
 	});
 	//Persist settings before closing tab
 	$(window).on("beforeunload", persist_settings); /* color picker init */
-	$('input.color-picker').miniColors({
-		change: function(hex, rgb) {
-			draw();
-		}
+	$('input[type=color]').spectrum({
+		showButtons: false,
+		showInput: true,
+		change: function(tinycolor) { draw(); },
 	});
+
 	$('input[data-slider]').on('slide', draw);
 	$('input[data-slider]').on('input', draw);
 
