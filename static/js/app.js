@@ -111,25 +111,16 @@ function draw() {
 }
 
 function swap_active_meme(e) {
-	$('#btn-meme-list').trigger('click'); // always close the menu
-	if ($(this).is('.active')) {
-		return;
-	}
-
 	$('#spinner-loading').show();
 	meme_list_container.find('li.active').removeClass('active');
 	$(this).addClass('active');
-	active_meme = $(this).children('a').data('img');
+	active_meme = $(this).find('option:selected').data('img');
 	img_is_loaded = false;
 	img.src = PATH + active_meme;
 	draw();
 	if (e) {
 		e.preventDefault();
 	}
-}
-
-function swap_active_font(e) {
-	draw();
 }
 
 function image_uploaded(data) {
@@ -162,16 +153,6 @@ function generate_meme(e) {
 	return false;
 }
 
-function toggle_meme_list(e) {
-	$(this).children('i').toggle();
-	$('.meme-list-container').slideToggle(100);
-	var tmp = this.title;
-	this.title = $(this).data('title-alt');
-	$(this).data('title-alt', tmp);
-	e.preventDefault();
-	return false;
-}
-
 function filter_list(text) {
 	if (typeof text != 'undefined' && text.length > 0) {
 		meme_list_container.find('li:not(.nav-header)').each(function(i, el) {
@@ -188,8 +169,9 @@ function filter_list(text) {
 
 function register_events() {
 	$([top_input[0], bottom_input[0]]).on('keyup', draw);
-	$('#btn-meme-list').on('click', toggle_meme_list);
-	meme_list_container.find('li:not(.nav-header)').on('click', swap_active_meme);
+
+	meme_list_container.on('change', swap_active_meme);
+
 	generate.on('click', generate_meme);
 
 	/* quick and dirty disable form submission */
@@ -247,21 +229,11 @@ function register_events() {
 		return false;
 	});
 
-	$(document).on('click', function(e) {
-		if ($('.meme-list-container').is(':visible')) {
-			$('#btn-meme-list').trigger('click');
-		}
-	});
-
-	$('.meme-list-container').on('click', function(e) {
-		return false;
-	});
-
 }
 
 function init() {
 	register_events();
-	active_meme = meme_list_container.find('li.active > a').data('img');
+	active_meme = meme_list_container.find('option[selected]').data('img');
 
 	img_is_loaded = false;
 	img.src = PATH + active_meme;
