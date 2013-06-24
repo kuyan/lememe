@@ -9,6 +9,8 @@ from staticjinja import Renderer
 BUILD_FOLDER = './build'
 IGNORE_PATTERN = shutil.ignore_patterns('.*')
 
+DEBUG = sys.argv[-1].lower() == 'debug'
+
 if __name__ == '__main__':
     # If the build folder exists, kill it.
     if os.path.exists(BUILD_FOLDER) and os.path.isdir(BUILD_FOLDER):
@@ -30,8 +32,7 @@ if __name__ == '__main__':
     # Render the HTML.
     renderer = Renderer(outpath=BUILD_FOLDER)
 
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'debug':
-            renderer.run(debug=True, use_reloader=True)
+    if DEBUG:
+        renderer.run(debug=True, use_reloader=True)
     else:
         renderer.run()
