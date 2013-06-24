@@ -1,8 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=Cantata+One|Fredericka+the+Great|Acme|Spicy+Rice|Ubuntu|Concert+One|Swanky+and+Moo+Moo|Cagliostro|Fredoka+One|Graduate|Chango|Quantico|Berkshire+Swash|Bangers|Play|Doppio+One|Bowlby+One|Francois+One);
-
 body {
 	padding-top: 56px;
-	padding-bottom: 10px;    
+	padding-bottom: 10px;
 }
 
 /* Faded out hr */
@@ -31,25 +29,25 @@ hr.soften {
 	color: #999;
 }
 
-.slider.addon-slider { 
-	width: 240px; 
-	padding-left: 10px; 
-	padding-right: 12px; 
+.slider.addon-slider {
+	width: 240px;
+	padding-left: 10px;
+	padding-right: 12px;
 }
 
 input[data-slider] {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 .meme-list-wrapper {
-	position: relative;  
+	position: relative;
 }
 .meme-list-container {
 	position: absolute;
 	padding: 1em 0;
 	border: 1px solid #000;
 	border-top: none;
-	background-color: #F9F9F9; 
+	background-color: #F9F9F9;
 	max-height: 600px;
 	overflow-y: auto;
 	overflow-x: hidden;
