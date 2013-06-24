@@ -12,7 +12,7 @@ var active_meme, active_font = 'Impact',
   is_persistent = $('#persistent-data'),
   font_size = $("#font-size"),
   outline_size = $("#outline-size"),
-  api_key = 'eef75ee1f4d14ddf5e48e67e6531f739', // ew
+  client_id = 'e8016e23a895cb9', // ew
   ctx = canvas.getContext('2d'),
   PATH = 'memes/',
   img = $("<img />")[0],
@@ -125,7 +125,7 @@ function swap_active_meme(e) {
 function image_uploaded(data) {
   Notifier.success('Your image has been uploaded successfully.', 'Complete!');
   $('#spinner-generate').hide();
-  userlink.val(data['upload']['links']['original']);
+  userlink.val(data['data']['link']);
   userlink[0].select();
   userlink[0].focus();
 }
@@ -139,14 +139,14 @@ function generate_meme(e) {
   $('#spinner-generate').show();
   var dataURL = canvas.toDataURL("image/png").split(',')[1];
   $.ajax({
-    url: 'http://api.imgur.com/2/upload.json',
+    url: 'https://api.imgur.com/3/image',
     type: 'POST',
     data: {
       type: 'base64',
-      key: api_key,
       image: dataURL
     },
-    dataType: 'json'
+    dataType: 'json',
+    headers: {'Authorization': 'Client-ID ' + client_id}
   }).success(image_uploaded).error(image_upload_failed);
   e.preventDefault();
   return false;
