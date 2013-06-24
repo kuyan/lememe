@@ -19,10 +19,12 @@ if __name__ == '__main__':
 
     # Copy the static files to the build folder.
     for f in os.listdir('static'):
+        if f.startswith('.'):
+            continue
+
         src = os.path.join('static', f)
         dst = os.path.join(BUILD_FOLDER, os.path.basename(src))
 
-        print src, dst
         shutil.copytree(src, dst, ignore=IGNORE_PATTERN)
 
     # Render the HTML.
