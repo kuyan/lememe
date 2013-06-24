@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% block css %}
   <link rel="stylesheet" type="text/css" href="css/spectrum.css">
+  <style type="text/css"> label[for=color2] { margin-top: 10px; }</style>
 {% endblock css %}
 
 {% block content %}
@@ -32,31 +33,42 @@
           <input type="text" class="input-block-level" id="text-top" placeholder="Top line"/>
           <input type="text" class="input-block-level" id="text-bottom" placeholder="Bottom line"/>
 
-          <input type="color" name="color1" value="#FFFFFF">
-          <input type="color" name="color2" value="#000000">
+          <div class="row">
+            <div class="span2">
+              <label for="color1">Text Color</label>
+              <input type="color" name="color1" value="#FFFFFF">
 
-          <label for="font-size">Text Size</label>
-          <div class="input-append">
-            <input type="text" value="50" class="span1" id="font-size">
-            <span class="add-on">px</span>
-          </div>
+              <label for="color2">Outline Color</label>
+              <input type="color" name="color2" value="#000000">
+            </div>
 
-          <label for="outline-size">Outline Size</label>
-          <div class="input-append">
-            <input type="text" value="2" class="span1" id="outline-size">
-            <span class="add-on">px</span>
-          </div>
+            <div class="span2">
+              <label for="font-size">Text Size</label>
+              <div class="input-append">
+                <input type="text" value="50" class="span1" id="font-size">
+                <span class="add-on">px</span>
+              </div>
 
-          <label for="padding-x">Padding X</label>
-          <div class="input-append">
-            <input type="text" class="span1" id="padding-x" value="0">
-            <span class="add-on">px</span>
-          </div>
+              <label for="outline-size">Outline Size</label>
+              <div class="input-append">
+                <input type="text" value="2" class="span1" id="outline-size">
+                <span class="add-on">px</span>
+              </div>
+            </div>
 
-          <label for="padding-y">Padding Y</label>
-          <div class="input-append">
-            <input type="text" class="span1" id="padding-y" value="4">
-            <span class="add-on">px</span>
+            <div class="span2">
+              <label for="padding-x">Padding X</label>
+              <div class="input-append">
+                <input type="text" class="span1" id="padding-x" value="0">
+                <span class="add-on">px</span>
+              </div>
+
+              <label for="padding-y">Padding Y</label>
+              <div class="input-append">
+                <input type="text" class="span1" id="padding-y" value="4">
+                <span class="add-on">px</span>
+              </div>
+            </div>
           </div>
 
           <button type="button" class="btn btn-large btn-block btn-primary" id="generate" title="Generate LeMEME">Upload to imgur</button>
