@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/minicolors.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+
+    <meta name="author" content="Robert Lemon - rob.lemon@gmail.com"/>
+    <meta name="robots" content="index, follow"/>
+    <meta name="copyright" content="Robert Lemon 2012"/>
+
+    <title>LeMEME - Online Meme Generator - Free Trolling for all!</title>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a href="http://rlemon.github.com/lememe/" class="brand" title="LeMEME - Online Meme Generator - Free Trolling for all!">LeMEME <span>Alpha2</span></a>
+          {% block navbar %}{% endblock %}
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      {% block content %}{% endblock %}
+
+      <hr class="soften">
+      <div class="row footer">
+         Developed by rlemon - <a href="https://github.com/rlemon/lememe/" title="Fork on GitHub">Fork on GitHub</a>
+        <span class="pull-right">
+        <a href="/about.html" title="About LeMEME">About</a>
+        <a href="/contact.html" title="Contact rlemon">Contact</a>
+        <a href="/legal.html" title="Legal mumbo jumbo">Legal</a>
+        </span>
+      </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    {% block js %}{% endblock js %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-31510292-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
