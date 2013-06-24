@@ -233,11 +233,7 @@ function register_events() {
 			draw();
 		}
 	});
-	$('input[data-slider]').on('slide', draw); /* preview font faces */
-	font_list.each(function() {
-		var link = $(this).children('a');
-		link.css('font-family', link.data('font'));
-	});
+	$('input[data-slider]').on('slide', draw);
 
 	$('#btn-clear-filter').on('click', function() {
 		$('#meme-filter').val('');
