@@ -84,10 +84,10 @@ function draw() {
     top_lines = fragmentText(top, width - font_size_val - pad_x_val);
     bottom_lines = (fragmentText(bottom, width - font_size_val - pad_x_val)).reverse(); // reverse it for bottom up!
 
-    top_lines.forEach(function(line, i) {
+    top_lines.forEach(function (line, i) {
       ctx.fillText(line, width / 2, pad_y_val + ((i + 1) * font_size_val));
     });
-    bottom_lines.forEach(function(line, i) {
+    bottom_lines.forEach(function (line, i) {
       ctx.fillText(line, width / 2, height - (pad_y_val + (i * font_size_val)));
     });
 
@@ -95,10 +95,10 @@ function draw() {
       ctx.strokeStyle = color2.val();
       ctx.lineWidth = outline_size.val();
 
-      top_lines.forEach(function(line, i) {
+      top_lines.forEach(function (line, i) {
         ctx.strokeText(line, width / 2, pad_y_val + ((i + 1) * font_size_val));
       });
-      bottom_lines.forEach(function(line, i) {
+      bottom_lines.forEach(function (line, i) {
         ctx.strokeText(line, width / 2, height - (pad_y_val + (i * font_size_val)));
       });
 
@@ -155,7 +155,7 @@ function generate_meme(e) {
 
 function filter_list(text) {
   if (typeof text != 'undefined' && text.length > 0) {
-    meme_list_container.find('li:not(.nav-header)').each(function(i, el) {
+    meme_list_container.find('li:not(.nav-header)').each(function (i, el) {
       if ($(this).text().toLowerCase().indexOf(text.toLowerCase()) === -1) {
         $(this).hide();
       } else if ($(this).is(':hidden')) {
@@ -173,7 +173,7 @@ function register_events() {
   generate.on('click', generate_meme); // Generate meme on generate button click
 
   /* quick and dirty disable form submission */
-  $('.nosubmit-form').submit(function(e) {
+  $('.nosubmit-form').submit(function (e) {
     e.preventDefault();
     return false;
   });
@@ -182,15 +182,15 @@ function register_events() {
     clickoutFiresChange: true,
     showButtons: false,
     showInput: true,
-    change: function(tinycolor) { draw(); } // Redraw if color changed.
+    change: function (tinycolor) { draw(); } // Redraw if color changed.
   });
 
-  $(document).on('dragover', function(e) {
+  $(document).on('dragover', function (e) {
     e.preventDefault();
     return false;
   });
 
-  $(document).on('drop', function(e) {
+  $(document).on('drop', function (e) {
     var data = e.dataTransfer || e.originalEvent.dataTransfer;
     if (data.files.length === 1) {
       img_is_loaded = false;
@@ -203,7 +203,7 @@ function register_events() {
       }
       var reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = function(ev) {
+      reader.onload = function (ev) {
         img_is_loaded = false;
         img.src = ev.target.result;
         draw();
@@ -224,7 +224,7 @@ function init() {
   img_is_loaded = false;
   img.src = PATH + active_meme;
 
-  img.onload = function(e) {
+  img.onload = function (e) {
     img_is_loaded = true;
   }; /* draw the default image */
 
