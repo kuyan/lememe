@@ -234,6 +234,7 @@ function register_events() {
 		}
 	});
 	$('input[data-slider]').on('slide', draw);
+	$('input[data-slider]').on('input', draw);
 
 	$('#btn-clear-filter').on('click', function() {
 		$('#meme-filter').val('');
