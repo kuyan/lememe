@@ -1,6 +1,6 @@
 var active_meme, active_font = 'Impact',
-	color1 = $('#color1'),
-	color2 = $('#color2'),
+	color1 = $('input[name=color1]'),
+	color2 = $('input[name=color2]'),
 	font_label = $('#label-active-font'),
 	canvas = $('#cvs')[0],
 	top_input = $('#text-top'),
@@ -199,6 +199,7 @@ function register_events() {
 	});
 
 	$('input[type=color]').spectrum({
+		clickoutFiresChange: true,
 		showButtons: false,
 		showInput: true,
 		change: function(tinycolor) { draw(); }
