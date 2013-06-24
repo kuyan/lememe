@@ -1,7 +1,6 @@
 var active_meme, active_font = 'Impact',
   color1 = $('input[name=color1]'),
   color2 = $('input[name=color2]'),
-  font_label = $('#label-active-font'),
   canvas = $('#cvs')[0],
   top_input = $('#text-top'),
   bottom_input = $('#text-bottom'),
