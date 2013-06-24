@@ -13,7 +13,7 @@ var active_meme, active_font = 'Impact',
 	is_persistent = $('#persistent-data'),
 	font_size = $("#font-size"),
 	outline_size = $("#outline-size"),
-	api_key = $('#api-key'),
+	api_key = 'eef75ee1f4d14ddf5e48e67e6531f739', // ew
 	ctx = canvas.getContext('2d'),
 	PATH = 'memes/',
 	img = $("<img />")[0],
@@ -153,7 +153,7 @@ function generate_meme(e) {
 		type: 'POST',
 		data: {
 			type: 'base64',
-			key: api_key.val(),
+			key: api_key,
 			image: dataURL
 		},
 		dataType: 'json'
@@ -216,10 +216,6 @@ function register_events() {
 		filter_list(jQuery.trim(this.value));
 	});
 
-	$('#toggle-custom-api').on('click', function() {
-		$('#api-key-container').slideToggle();
-	});
-
 	$('.info-popover').popover();
 
 	$(document).on('dragover', function(e) {
@@ -251,6 +247,7 @@ function register_events() {
 		e.preventDefault();
 		return false;
 	});
+
 	$(document).on('click', function(e) {
 		if ($('.meme-list-container').is(':visible')) {
 			$('#btn-meme-list').trigger('click');
