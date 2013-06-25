@@ -126,6 +126,7 @@ function image_uploaded(data) {
   userlink[0].select();
   userlink[0].focus();
   $('#img-submitreddit').attr('href', 'http://www.reddit.com/submit?url=' + escape(data['data']['link']));
+  $('#img-delete').attr('href', 'http://imgur.com/delete/' + data['data']['deletehash'])
 }
 
 function image_upload_failed() {
@@ -183,6 +184,14 @@ function register_events() {
   // Initialize Bootstrap modals.
   $('.modal').modal({
     show: false
+  });
+
+  // Initialize Spectrum color pickers.
+  $('input[type=color]').spectrum({
+    clickoutFiresChange: true,
+    showButtons: false,
+    showInput: true,
+    change: function (tinycolor) { draw(); } // Redraw if color changed.
   });
 
   // // Drag to upload
