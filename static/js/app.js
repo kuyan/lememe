@@ -111,15 +111,10 @@ function draw() {
 
 function swap_active_meme(e) {
   $('#spinner-loading').show();
-  meme_list_container.find('li.active').removeClass('active');
-  $(this).addClass('active');
   active_meme = $(this).find('option:selected').data('img');
   img_is_loaded = false;
   img.src = PATH + active_meme;
   draw();
-  if (e) {
-    e.preventDefault();
-  }
 }
 
 function image_uploaded(data) {
@@ -170,12 +165,18 @@ function filter_list(text) {
 }
 
 function register_events() {
-  $([top_input[0], bottom_input[0]]).on('keyup', draw); // Redraw if meme text modified.
-  meme_list_container.on('change', swap_active_meme); // Redraw if active meme switched.
+  $('#meme-settings :input[type=text]').on('input reset', draw);
+
+  meme_list_container.on('change reset', swap_active_meme); // Redraw if active meme switched.
   generate.on('click', generate_meme); // Generate meme on generate button click
 
-  $('#form-reset').on('click', function (e) { $('#meme-settings')[0].reset(); draw(); });
-  /* quick and dirty disable form submission */
+  // Reset meme options if requested in upload-completed modal
+  $('#form-reset').on('click', function (e) {
+    $('#meme-settings')[0].reset();
+    swap_active_meme.call(meme_list_container);
+  });
+
+  // Prevent form submission
   $('form').submit(function (e) {
     e.preventDefault();
     return false;
