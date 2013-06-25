@@ -5,6 +5,12 @@
 {% endblock css %}
 
 {% block content %}
+  <div class="row" id="alert-row">
+    <div class="alert alert-error hide fade in out" id="imgur-fail-alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Huh, that's odd.</strong> LeMEME couldn't contact Imgur's servers. Try again in a few minutes?
+    </div>
+  </div>
   <div class="row">
     <div class="span6">
       <div class="row image-container">
@@ -116,6 +122,5 @@
 {% block js %}
   <script type="text/javascript" src="js/fragBuilder.js"></script>
   <script type="text/javascript" src="js/spectrum.js"></script>
-  <script type="text/javascript" src="js/notifier.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
 {% endblock js %}
