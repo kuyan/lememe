@@ -175,13 +175,18 @@ function register_events() {
   generate.on('click', generate_meme); // Generate meme on generate button click
 
   $('#form-reset').on('click', function (e) { $('#meme-settings')[0].reset(); draw(); });
-  $('.modal').modal({show: false});
   /* quick and dirty disable form submission */
-  $('.nosubmit-form').submit(function (e) {
+  $('form').submit(function (e) {
     e.preventDefault();
     return false;
   });
 
+  // Initialize Bootstrap modals.
+  $('.modal').modal({
+    show: false
+  });
+
+  // Initialize Spectrum color pickers.
   $('input[type=color]').spectrum({
     clickoutFiresChange: true,
     showButtons: false,
