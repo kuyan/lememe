@@ -1,4 +1,5 @@
-var active_meme, active_font = 'Impact',
+var active_meme,
+  active_font = 'Impact',
   color1 = $('input[name=color1]'),
   color2 = $('input[name=color2]'),
   canvas = $('#cvs')[0],
@@ -9,7 +10,6 @@ var active_meme, active_font = 'Impact',
   meme_list_container = $('#meme-list-container'),
   generate = $('#generate'),
   userlink = $('#img-directlink'),
-  is_persistent = $('#persistent-data'),
   font_size = $("#font-size"),
   outline_size = $("#outline-size"),
   client_id = 'e8016e23a895cb9', // ew
@@ -169,13 +169,13 @@ function register_events() {
   $('#meme-settings :input[type=text]').on('input reset', draw); // Redraw if any input changes.
   $('#meme-settings').on('submit', generate_meme); // Generate meme on generate form submit
 
-  // Reset meme options if requested in upload-completed modal
+  // Reset meme options on reset button trigger
   $('#form-reset').on('click', function (e) {
     $('#meme-settings')[0].reset();
     swap_active_meme.call(meme_list_container);
   });
 
-  // Prevent form submission
+  // Prevent conventional form submission
   $('form').on('submit', function (e) {
     e.preventDefault();
   });
@@ -185,14 +185,7 @@ function register_events() {
     show: false
   });
 
-  // Initialize Spectrum color pickers.
-  $('input[type=color]').spectrum({
-    clickoutFiresChange: true,
-    showButtons: false,
-    showInput: true,
-    change: function (tinycolor) { draw(); } // Redraw if color changed.
-  });
-
+  // // Drag to upload
   $(document).on('dragover', function (e) {
     e.preventDefault();
     return false;
