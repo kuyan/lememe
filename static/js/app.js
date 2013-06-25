@@ -1,17 +1,25 @@
-var active_meme,
-  active_font = 'Impact',
+var
+  // Options
+  active_meme,
   color1 = $('input[name=color1]'),
   color2 = $('input[name=color2]'),
-  canvas = $('#cvs')[0],
-  top_input = $('#text-top'),
-  bottom_input = $('#text-bottom'),
+  font = 'Impact',
+  font_size = $("#font-size"),
+  line1 = $('#text-top'),
+  line2 = $('#text-bottom'),
+  outline_size = $("#outline-size"),
   padding_x = $('#padding-x'),
   padding_y = $('#padding-y'),
+  // Elements
+  canvas = $('#cvs')[0],
   meme_list_container = $('#meme-list-container'),
-  generate = $('#generate'),
+  generate_button = $('#generate'),
   userlink = $('#img-directlink'),
-  font_size = $("#font-size"),
-  outline_size = $("#outline-size"),
+  hotlink = $('#img-directlink'),
+  page_link = $('#img-imgurlink'),
+  reddit_link = $('#img-submitreddit'),
+  delete_link = $('#img-delete'),
+  //
   client_id = 'e8016e23a895cb9', // ew
   ctx = canvas.getContext('2d'),
   PATH = 'memes/',
@@ -21,12 +29,12 @@ var active_meme,
 function set_generate_button_state(state) {
   switch (state) {
     case 'loading':
-      $('#generate').button('loading');
-      $('#generate').addClass('btn-progress');
+      generate_button.button('loading');
+      generate_button.addClass('btn-progress');
       break;
     case 'reset':
-      $('#generate').button('reset');
-      $('#generate').removeClass('btn-progress');
+      generate_button.button('reset');
+      generate_button.removeClass('btn-progress');
       break;
   }
 }
@@ -72,8 +80,8 @@ function draw() {
       maxw = 480,
       height = img.height,
       width = img.width,
-      top = top_input.val(),
-      bottom = bottom_input.val(),
+      top = line1.val(),
+      bottom = line2.val(),
       font_size_val = parseInt(font_size.val(), 0),
       pad_y_val = parseInt(padding_y.val(), 0),
       pad_x_val = parseInt(padding_x.val(), 0);
@@ -89,7 +97,7 @@ function draw() {
     ctx.clearRect(0, 0, width, height);
     ctx.drawImage(img, 0, 0, width, height);
 
-    ctx.font = "bold " + font_size_val + "px " + active_font;
+    ctx.font = "bold " + font_size_val + "px " + font;
     ctx.textAlign = "center";
     ctx.fillStyle = color1.val();
 
@@ -131,17 +139,17 @@ function swap_active_meme(e) {
 }
 
 function image_uploaded(data) {
-  // Notifier.success('Your image has been uploaded successfully.', 'Complete!');
+  // Fill in the modal before it's shown
+  hotlink.val(data['data']['link']);
+  page_link.val('http://imgur.com/' + data['data']['id']);
+  reddit_link.attr('href', 'http://www.reddit.com/submit?url=' + escape(data['data']['link']));
+  delete_link.attr('href', 'http://imgur.com/delete/' + data['data']['deletehash']);
+
   $('#upload-success').modal('show');
+  hotlink[0].select();
+  hotlink[0].focus();
+
   set_generate_button_state('reset');
-  userlink.val(data['data']['link']);
-  $('#img-imgurlink').val('http://imgur.com/' + data['data']['id']);
-  userlink[0].select();
-  userlink[0].focus();
-  $('#img-submitreddit').attr('href', 'http://www.reddit.com/submit?url=' + escape(data['data']['link']));
-  $('#img-delete').attr('href', 'http://imgur.com/delete/' + data['data']['deletehash']);
-  $('#generate').button('reset');
-  $('#generate').removeClass('btn-progress');
 }
 
 function image_upload_failed() {
@@ -183,7 +191,7 @@ function filter_list(text) {
 function register_events() {
   meme_list_container.on('change reset', swap_active_meme); // Redraw if active meme switched.
   $('#meme-settings :input[type=text]').on('input reset', draw); // Redraw if any input changes.
-  $('#generate').on('click', generate_meme); // Generate meme on generate form submit
+  generate_button.on('click', generate_meme); // Generate meme on generate form submit
 
   // Reset meme options on reset button trigger
   $('#form-reset').on('click', function (e) {
@@ -202,7 +210,7 @@ function register_events() {
   });
 
   // Initialize Bootstrap buttons.
-  $('#generate').button();
+  generate_button.button();
 
   // Initialize Spectrum color pickers.
   $('input[type=color]').spectrum({
