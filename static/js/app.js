@@ -19,6 +19,7 @@ var
   page_link = $('#img-imgurlink'),
   reddit_link = $('#img-submitreddit'),
   delete_link = $('#img-delete'),
+  alert_row = $('#alert-row')
   //
   client_id = 'e8016e23a895cb9', // ew
   ctx = canvas.getContext('2d'),
@@ -39,6 +40,11 @@ function set_generate_button_state(state) {
   }
 }
 
+function display_alert(severity, title, text) {
+  $('#alert-triggered').alert('close')
+  var alert = ' <div class="alert alert-' + severity + ' fade in out" id="alert-triggered"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>' + title + '</strong> ' + text + '</div>'
+  alert_row.append(alert)
+}
 /* takes a string and a maxWidth and splits the text into lines */
 
 function fragmentText(text, maxWidth) {
@@ -153,7 +159,7 @@ function image_uploaded(data) {
 }
 
 function image_upload_failed() {
-  Notifier.error('Could not reach imgur service. Enter a new API Key or wait a few minutes and try again.', 'Error!');
+  display_alert('error', "Huh, that's odd.", "LeMEME couldn't contact Imgur's servers. Try again in a few minutes?");
   set_generate_button_state('reset');
 }
 
@@ -233,7 +239,7 @@ function register_events() {
       $('#spinner-loading').show();
       var file = data.files[0];
       if (file.type.indexOf('image') === -1) {
-        Notifier.error('Not an image!', 'you may only drop images to the page');
+        display_alert('error', 'Not an image!', 'You may only drop images on the page.');
         e.preventDefault();
         return false;
       }
@@ -245,7 +251,7 @@ function register_events() {
         draw();
       };
     } else {
-      Notifier.error('Too many files!', 'you may only drop one image at a time to the page');
+      display_alert('error', 'Too many files!', 'You can only drop one image on the page at a time.')
     }
     e.preventDefault();
     return false;
