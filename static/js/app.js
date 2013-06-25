@@ -8,7 +8,7 @@ var active_meme, active_font = 'Impact',
   padding_y = $('#padding-y'),
   meme_list_container = $('#meme-list-container'),
   generate = $('#generate'),
-  userlink = $('#img-link'),
+  userlink = $('#img-directlink'),
   is_persistent = $('#persistent-data'),
   font_size = $("#font-size"),
   outline_size = $("#outline-size"),
@@ -123,11 +123,14 @@ function swap_active_meme(e) {
 }
 
 function image_uploaded(data) {
-  Notifier.success('Your image has been uploaded successfully.', 'Complete!');
+  // Notifier.success('Your image has been uploaded successfully.', 'Complete!');
+  $('#upload-success').modal('show');
   $('#spinner-generate').hide();
   userlink.val(data['data']['link']);
+  $('#img-imgurlink').val('http://imgur.com/' + data['data']['id']);
   userlink[0].select();
   userlink[0].focus();
+  $('#img-submitreddit').attr('href', 'http://www.reddit.com/submit?url=' + escape(data['data']['link']));
 }
 
 function image_upload_failed() {
@@ -171,6 +174,8 @@ function register_events() {
   meme_list_container.on('change', swap_active_meme); // Redraw if active meme switched.
   generate.on('click', generate_meme); // Generate meme on generate button click
 
+  $('#form-reset').on('click', function (e) { $('#meme-settings')[0].reset(); draw(); });
+  $('.modal').modal({show: false});
   /* quick and dirty disable form submission */
   $('.nosubmit-form').submit(function (e) {
     e.preventDefault();
