@@ -159,7 +159,7 @@ function image_uploaded(data) {
 }
 
 function image_upload_failed() {
-  display_alert('error', "Huh, that's odd.", "LeMEME couldn't contact Imgur's servers. Try again in a few minutes?");
+  display_alert('error', "Huh, that's odd.", "Memecap couldn't contact Imgur's servers. Try again in a few minutes?");
   set_generate_button_state('reset');
 }
 
