@@ -18,6 +18,19 @@ var active_meme,
   img = $("<img />")[0],
   img_is_loaded = false;
 
+function set_generate_button_state(state) {
+  switch (state) {
+    case 'loading':
+      $('#generate').button('loading');
+      $('#generate').addClass('btn-progress');
+      break;
+    case 'reset':
+      $('#generate').button('reset');
+      $('#generate').removeClass('btn-progress');
+      break;
+  }
+}
+
 /* takes a string and a maxWidth and splits the text into lines */
 
 function fragmentText(text, maxWidth) {
@@ -120,22 +133,24 @@ function swap_active_meme(e) {
 function image_uploaded(data) {
   // Notifier.success('Your image has been uploaded successfully.', 'Complete!');
   $('#upload-success').modal('show');
-  $('#spinner-generate').hide();
+  set_generate_button_state('reset');
   userlink.val(data['data']['link']);
   $('#img-imgurlink').val('http://imgur.com/' + data['data']['id']);
   userlink[0].select();
   userlink[0].focus();
   $('#img-submitreddit').attr('href', 'http://www.reddit.com/submit?url=' + escape(data['data']['link']));
-  $('#img-delete').attr('href', 'http://imgur.com/delete/' + data['data']['deletehash'])
+  $('#img-delete').attr('href', 'http://imgur.com/delete/' + data['data']['deletehash']);
+  $('#generate').button('reset');
+  $('#generate').removeClass('btn-progress');
 }
 
 function image_upload_failed() {
   Notifier.error('Could not reach imgur service. Enter a new API Key or wait a few minutes and try again.', 'Error!');
-  $('#spinner-generate').hide();
+  set_generate_button_state('reset');
 }
 
 function generate_meme(e) {
-  $('#spinner-generate').show();
+  set_generate_button_state('loading');
   var dataURL = canvas.toDataURL("image/png").split(',')[1];
   $.ajax({
     url: 'https://api.imgur.com/3/image',
@@ -168,7 +183,7 @@ function filter_list(text) {
 function register_events() {
   meme_list_container.on('change reset', swap_active_meme); // Redraw if active meme switched.
   $('#meme-settings :input[type=text]').on('input reset', draw); // Redraw if any input changes.
-  $('#meme-settings').on('submit', generate_meme); // Generate meme on generate form submit
+  $('#generate').on('click', generate_meme); // Generate meme on generate form submit
 
   // Reset meme options on reset button trigger
   $('#form-reset').on('click', function (e) {
@@ -185,6 +200,9 @@ function register_events() {
   $('.modal').modal({
     show: false
   });
+
+  // Initialize Bootstrap buttons.
+  $('#generate').button();
 
   // Initialize Spectrum color pickers.
   $('input[type=color]').spectrum({
