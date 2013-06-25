@@ -165,10 +165,9 @@ function filter_list(text) {
 }
 
 function register_events() {
-  $('#meme-settings :input[type=text]').on('input reset', draw);
-
   meme_list_container.on('change reset', swap_active_meme); // Redraw if active meme switched.
-  generate.on('click', generate_meme); // Generate meme on generate button click
+  $('#meme-settings :input[type=text]').on('input reset', draw); // Redraw if any input changes.
+  $('#meme-settings').on('submit', generate_meme); // Generate meme on generate form submit
 
   // Reset meme options if requested in upload-completed modal
   $('#form-reset').on('click', function (e) {
@@ -177,9 +176,8 @@ function register_events() {
   });
 
   // Prevent form submission
-  $('form').submit(function (e) {
+  $('form').on('submit', function (e) {
     e.preventDefault();
-    return false;
   });
 
   // Initialize Bootstrap modals.
