@@ -54,7 +54,7 @@ function set_loading_bar_state(state) {
 
 function display_alert(severity, title, text) {
   $('#alert-triggered').alert('close');
-  var alert = ' <div class="alert alert-' + severity + ' fade in out" id="alert-triggered"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>' + title + '</strong> ' + text + '</div>';
+  var alert = '<div class="alert alert-' + severity + ' fade in out" id="alert-triggered"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>' + title + '</strong> ' + text + '</div>';
   alert_row.append(alert);
 }
 /* takes a string and a maxWidth and splits the text into lines */
