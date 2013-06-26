@@ -27,6 +27,16 @@ html, body { height: 100%; }
   padding-bottom: 15px;
 }
 
+#loading-bar {
+  position: relative;
+  top: 200px;
+  left: 33%;
+  display: none;
+}
+#loading-bar .progress {
+  width: 240px;
+}
+
 #cvs {
 	display: block;
 	margin: 0 auto;
