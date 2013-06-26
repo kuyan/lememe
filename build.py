@@ -28,6 +28,7 @@ def build_production(renderer):
     """Build Memecap for production and hosting on Github Pages."""
     renderer.run()
     compress_js(os.path.join(BUILD_DIR, 'js'))
+    compress_css(os.path.join(BUILD_DIR, 'css'))
 
 
 def compress_js(path):
@@ -42,6 +43,18 @@ def compress_js(path):
             source.write(compressed)
             source.truncate()
 
+
+def compress_css(path):
+    """Compress CSS files in `path` with cssmin."""
+    import cssmin
+    files = glob.iglob(os.path.join(path, '*.css'))
+
+    for css in files:
+        with open(css, 'r+') as source:
+            compressed = cssmin.cssmin(source.read())
+            source.seek(0)
+            source.write(compressed)
+            source.truncate()
 
 cmd_routes = {
     'devel': build_devel,
