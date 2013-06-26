@@ -9,12 +9,23 @@ from staticjinja import Renderer
 
 BUILD_DIR = './build'
 STATIC_DIR = './static'
+TEMPLATE_DIR = './templates'
 
 
-def _init_renderer():
+def _get_stage():
+    """Return whether the site is being built for development or production."""
+    return {'STAGE': sys.argv[-1].lower()}
+
+
+def _init_renderer(stage):
+    """Initialize the staticjinja.Renderer object."""
     distutils.dir_util.mkpath(BUILD_DIR)  # Create build directory
     distutils.dir_util.copy_tree(STATIC_DIR, BUILD_DIR, update=True)  # Copy static files to build directory
-    renderer = Renderer(outpath=BUILD_DIR)  # Render HTML
+    renderer = Renderer(  # Render HTML
+        template_folder=TEMPLATE_DIR,
+        outpath=BUILD_DIR,
+        contexts=[(page, _get_stage) for page in os.listdir(TEMPLATE_DIR)]
+    )
 
     return renderer
 
@@ -66,5 +77,7 @@ if __name__ == '__main__':
     #if os.path.exists(BUILD_DIR) and os.path.isdir(BUILD_DIR):
     #    shutil.rmtree(BUILD_DIR)
 
-    renderer = _init_renderer()
-    cmd_routes[sys.argv[-1].lower()](renderer)
+    stage = _get_stage()['STAGE']  # development or production?
+    renderer = _init_renderer(stage)
+
+    cmd_routes[stage](renderer)
