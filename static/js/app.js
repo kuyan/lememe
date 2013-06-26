@@ -19,7 +19,8 @@ var
   page_link = $('#img-imgurlink'),
   reddit_link = $('#img-submitreddit'),
   delete_link = $('#img-delete'),
-  alert_row = $('#alert-row')
+  alert_row = $('#alert-row'),
+  loading_bar = $('#loading-bar')
   //
   client_id = 'e8016e23a895cb9', // ew
   ctx = canvas.getContext('2d'),
@@ -40,10 +41,21 @@ function set_generate_button_state(state) {
   }
 }
 
+function set_loading_bar_state(state) {
+  switch (state) {
+    case 'show':
+      loading_bar.show();
+      break;
+    case 'hide':
+      loading_bar.hide();
+      break;
+  }
+}
+
 function display_alert(severity, title, text) {
-  $('#alert-triggered').alert('close')
-  var alert = ' <div class="alert alert-' + severity + ' fade in out" id="alert-triggered"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>' + title + '</strong> ' + text + '</div>'
-  alert_row.append(alert)
+  $('#alert-triggered').alert('close');
+  var alert = ' <div class="alert alert-' + severity + ' fade in out" id="alert-triggered"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>' + title + '</strong> ' + text + '</div>';
+  alert_row.append(alert);
 }
 /* takes a string and a maxWidth and splits the text into lines */
 
@@ -81,7 +93,7 @@ function fragmentText(text, maxWidth) {
 
 function draw() {
   if (img_is_loaded) {
-    $('#spinner-loading').hide();
+    set_loading_bar_state('hide');
     var maxh = 640,
       maxw = 480,
       height = img.height,
@@ -137,7 +149,7 @@ function draw() {
 }
 
 function swap_active_meme(e) {
-  $('#spinner-loading').show();
+  set_loading_bar_state('show');
   active_meme = $(this).find('option:selected').data('img');
   img_is_loaded = false;
   img.src = PATH + active_meme;
@@ -236,7 +248,7 @@ function register_events() {
     var data = e.dataTransfer || e.originalEvent.dataTransfer;
     if (data.files.length === 1) {
       img_is_loaded = false;
-      $('#spinner-loading').show();
+      set_loading_bar_state('show');
       var file = data.files[0];
       if (file.type.indexOf('image') === -1) {
         display_alert('error', 'Not an image!', 'You may only drop images on the page.');
