@@ -7,9 +7,9 @@ import sys
 
 from staticjinja import Renderer
 
-BUILD_DIR = './build'
-STATIC_DIR = './static'
-TEMPLATE_DIR = './templates'
+BUILD_DIR = 'build'
+STATIC_DIR = 'static'
+TEMPLATE_DIR = 'templates'
 
 
 def _get_stage():
