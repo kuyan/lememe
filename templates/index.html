@@ -1,7 +1,6 @@
 {% extends '_base.html' %}
 {% block css %}
   <link rel="stylesheet" type="text/css" href="css/spectrum.css">
-  <style type="text/css"> label[for=color2] { margin-top: 10px; }</style>
 {% endblock css %}
 
 {% block content %}
@@ -32,45 +31,77 @@
     </div>
 
     <div class="span6">
-      <form id="meme-settings">
+      <form id="meme-settings" class="form-horizontal">
         <fieldset>
           <legend>Meme Settings</legend>
-          <label for="meme-list-container" style="display: inline; vertical-align: super;">Meme</label>
-          {% include '_meme_list.html' %}
-          <input type="text" class="input-block-level" id="text-top" placeholder="Top line"/>
-          <input type="text" class="input-block-level" id="text-bottom" placeholder="Bottom line"/>
+          <div class="control-group">
+            <label class="control-label" for="meme-list-container">Meme</label>
+            <div class="controls">
+              {% include '_meme_list.html' %}
+            </div>
+          </div>
 
-          <div class="row">
-            <div class="span2">
-              <label for="color1">Text Color</label>
+          <div class="control-group">
+            <label class="control-label" for="text-top">Top Line</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" id="text-top" placeholder="Top line"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="text-bottom">Bottom Line</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" id="text-bottom" placeholder="Bottom line"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Text Color</label>
+            <div class="controls">
               <input type="color" name="color1" value="#FFFFFF">
+            </div>
+          </div>
 
-              <label for="color2">Outline Color</label>
+          <div class="control-group">
+            <label class="control-label">Outline Color</label>
+            <div class="controls">
               <input type="color" name="color2" value="#000000">
             </div>
+          </div>
 
-            <div class="span2">
-              <label for="font-size">Font Size</label>
+          <div class="control-group">
+            <label class="control-label" for="font-size">Font Size</label>
+            <div class="controls">
               <div class="input-append">
                 <input type="text" value="50" class="span1" id="font-size">
                 <span class="add-on">px</span>
               </div>
+            </div>
+          </div>
 
-              <label for="outline-size">Outline Size</label>
+          <div class="control-group">
+            <label class="control-label" for="outline-size">Outline Size</label>
+            <div class="controls">
               <div class="input-append">
                 <input type="text" value="2" class="span1" id="outline-size">
                 <span class="add-on">px</span>
               </div>
             </div>
+          </div>
 
-            <div class="span2">
-              <label for="padding-x">Padding X</label>
+          <div class="control-group">
+            <label class="control-label" for="padding-x">Padding X</label>
+            <div class="controls">
               <div class="input-append">
                 <input type="text" class="span1" id="padding-x" value="0">
                 <span class="add-on">px</span>
               </div>
+            </div>
+          </div>
 
-              <label for="padding-y">Padding Y</label>
+          <div class="control-group">
+            <label class="control-label" for="padding-y">Padding Y</label>
+            <div class="controls">
               <div class="input-append">
                 <input type="text" class="span1" id="padding-y" value="4">
                 <span class="add-on">px</span>
