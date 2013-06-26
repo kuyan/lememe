@@ -50,6 +50,9 @@ html, body {
   display: inline;
 }
 
+#alert-triggered {
+  margin-bottom: 0;
+}
 /* https://github.com/twitter/bootstrap/pull/6673 */
 
 .btn.disabled.btn-progress, .btn[disabled].btn-progress {
