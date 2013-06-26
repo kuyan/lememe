@@ -93,7 +93,6 @@ function fragmentText(text, maxWidth) {
 
 function draw() {
   if (img_is_loaded) {
-    set_loading_bar_state('hide');
     var maxh = 640,
       maxw = 480,
       height = img.height,
@@ -215,6 +214,7 @@ function register_events() {
   $('#form-reset').on('click', function (e) {
     $('#meme-settings')[0].reset();
     swap_active_meme.call(meme_list_container);
+    set_loading_bar_state('hide'); // kinda dirty fix... i think
   });
 
   // Prevent conventional form submission
@@ -263,7 +263,7 @@ function register_events() {
         draw();
       };
     } else {
-      display_alert('error', 'Too many files!', 'You can only drop one image on the page at a time.')
+      display_alert('error', 'Too many files!', 'You can only drop one image on the page at a time.');
     }
     e.preventDefault();
     return false;
@@ -280,8 +280,10 @@ function init() {
 
   img.onload = function (e) {
     img_is_loaded = true;
-  }; /* draw the default image */
+    set_loading_bar_state('hide');
+  };
 
+  // Draw the default image.
   setTimeout(draw, 200); // hack fix
 }
 
