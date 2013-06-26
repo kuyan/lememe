@@ -227,6 +227,9 @@ function register_events() {
     show: false
   });
 
+  // Initialize Select2.
+  meme_list_container.select2();
+
   // Initialize Bootstrap buttons.
   generate_button.button();
 
