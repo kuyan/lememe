@@ -1,38 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
-import shutil
+import distutils.dir_util
 import sys
 
 from staticjinja import Renderer
 
-BUILD_FOLDER = './build'
-IGNORE_PATTERN = shutil.ignore_patterns('.*')
+BUILD_DIR = './build'
+STATIC_DIR = './static'
 
-DEBUG = sys.argv[-1].lower() == 'debug'
+def _init_renderer():
+    distutils.dir_util.mkpath(BUILD_DIR)  # Create build directory
+    distutils.dir_util.copy_tree(STATIC_DIR, BUILD_DIR, update=True)  # Copy static files to build directory
+    renderer = Renderer(outpath=BUILD_DIR)  # Render HTML
+
+    return renderer
+
+def build_devel(renderer):
+    """Build Memecap for development in BUILD_DIR."""
+    renderer.run(debug=True, use_reloader=True)
+
+def build_production(renderer):
+    """Build Memecap for production and hosting on Github Pages."""
+    renderer.run()
+
+cmd_routes = {
+    'devel': build_devel,
+    'production': build_production
+}
 
 if __name__ == '__main__':
     # If the build folder exists, kill it.
-    if os.path.exists(BUILD_FOLDER) and os.path.isdir(BUILD_FOLDER):
-        shutil.rmtree(BUILD_FOLDER)
+    #if os.path.exists(BUILD_DIR) and os.path.isdir(BUILD_DIR):
+    #    shutil.rmtree(BUILD_DIR)
 
-    # If the build folder doesn't exist, make it.
-    os.makedirs(BUILD_FOLDER)
-
-    # Copy the static files to the build folder.
-    for f in os.listdir('static'):
-        if f.startswith('.'):
-            continue
-
-        src = os.path.join('static', f)
-        dst = os.path.join(BUILD_FOLDER, os.path.basename(src))
-
-        shutil.copytree(src, dst, ignore=IGNORE_PATTERN)
-
-    # Render the HTML.
-    renderer = Renderer(outpath=BUILD_FOLDER)
-
-    if DEBUG:
-        renderer.run(debug=True, use_reloader=True)
-    else:
-        renderer.run()
+    renderer = _init_renderer()
+    cmd_routes[sys.argv[-1].lower()](renderer)
