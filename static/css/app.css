@@ -45,10 +45,14 @@ html, body {
 	padding: 15px 0 15px 0;
 }
 
+.footer-links, .footer-links li {
+  list-style-type: none;
+  display: inline;
+}
+
 /* https://github.com/twitter/bootstrap/pull/6673 */
 
-.btn.disabled.btn-progress,
-.btn[disabled].btn-progress {
+.btn.disabled.btn-progress, .btn[disabled].btn-progress {
   background-color: #cccccc;
   background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -67,8 +71,7 @@ html, body {
           animation: progress-bar-stripes 2s linear infinite;
 }
 
-.btn.disabled.btn-progress.btn-primary,
-.btn[disabled].btn-progress.btn-primary {
+.btn.disabled.btn-progress.btn-primary,.btn[disabled].btn-progress.btn-primary {
   background-color: #0088cc;
   background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
