@@ -36,6 +36,6 @@ The app will then be available through http://localhost:8000.
 
 Origins
 -------
-Memecap is a <strike>shameless ripoff</strike> fork of [rlemon/lememe](https://github.com/rlemon/lememe).
+Memecap is a ~~shameless ripoff~~ fork of [rlemon/lememe](https://github.com/rlemon/lememe).
 
 
