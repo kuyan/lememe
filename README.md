@@ -31,6 +31,7 @@ The built application will be stored in `build/`. You can view the application b
 
     $ python -m SimpleHTTPServer
 
+Note: Memecap will be unable to upload memes to imgur if used locally (i.e. sans-SimpleHTTPServer) as Chrome blocks such Ajax requests.
 The app will then be available through http://localhost:8000.
 
 Origins
