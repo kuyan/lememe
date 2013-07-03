@@ -49,7 +49,7 @@ def compress_js(path):
 
     for js in files:
         with open(js, 'r+') as source:
-            compressed = slimit.minify(source.read(), mangle=True, mangle_toplevel=False)
+            compressed = slimit.minify(source.read(), mangle=True, mangle_toplevel=True)
             source.seek(0)
             source.write(compressed)
             source.truncate()
