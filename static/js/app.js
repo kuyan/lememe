@@ -8,8 +8,6 @@ var
   line1 = $('#text-top'),
   line2 = $('#text-bottom'),
   outline_size = $("#outline-size"),
-  padding_x = $('#padding-x'),
-  padding_y = $('#padding-y'),
   // Elements
   canvas = $('#cvs')[0],
   meme_list_container = $('#meme-list-container'),
@@ -100,8 +98,7 @@ function draw() {
       top = line1.val(),
       bottom = line2.val(),
       font_size_val = parseInt(font_size.val(), 0),
-      pad_y_val = parseInt(padding_y.val(), 0),
-      pad_x_val = parseInt(padding_x.val(), 0);
+      pad_y_val = 4;
 
     while (height > maxh || width > maxw) {
       --height;
@@ -118,8 +115,8 @@ function draw() {
     ctx.textAlign = "center";
     ctx.fillStyle = color1.val();
 
-    top_lines = fragmentText(top, width - font_size_val - pad_x_val);
-    bottom_lines = (fragmentText(bottom, width - font_size_val - pad_x_val)).reverse(); // reverse it for bottom up!
+    top_lines = fragmentText(top, width - font_size_val);
+    bottom_lines = (fragmentText(bottom, width - font_size_val)).reverse(); // reverse it for bottom up!
 
     top_lines.forEach(function (line, i) {
       ctx.fillText(line, width / 2, pad_y_val + ((i + 1) * font_size_val));
