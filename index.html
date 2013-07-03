@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    
+  <link rel="stylesheet" type="text/css" href="css/spectrum.css">
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.css">
+
+    <meta name="description" content="A simple and speedy meme creation application." />
+    <title>Memecap - Online Meme Generator</title>
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a href="./index.html" class="brand" title="Memecap - Online Meme Generator">Memecap</a>
+            
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        
+  <div class="row" id="alert-row">
+    <div class="alert alert-error hide fade in out" id="imgur-fail-alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Huh, that's odd.</strong> Memecap couldn't contact Imgur's servers. Try again in a few minutes?
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <div class="row image-container">
+        <div id="loading-bar">
+          <div class="progress progress-striped active">
+            <div class="bar" style="width: 100%;"></div>
+          </div>
+        </div>
+        <canvas id="cvs">
+          You need a more up-to-date browser to use Memecap. <a href="http://browsehappy.com/">Upgrade your browser!</a>
+        </canvas>
+      </div>
+      <div class="row">
+        <div class="alert alert-block">
+          <h4>Can't find your favorite meme?</h4>
+          You can drag and drop an image anywhere on the page to use it!
+        </div>
+      </div>
+    </div>
+
+    <div class="span6">
+      <form id="meme-settings" class="form-horizontal">
+        <fieldset>
+          <legend>Meme Settings</legend>
+          <div class="control-group">
+            <label class="control-label" for="meme-list-container">Meme</label>
+            <div class="controls">
+              <select id="meme-list-container">
+   <optgroup label="Toons">
+        <option data-img="toons/philosoraptor.jpg">Philosoraptor</option>
+        <option data-img="toons/me_gusta.jpg">Me Gusta</option>
+        <option data-img="toons/all_of_the_things.jpg">All Of The Things</option>
+        <option data-img="toons/rage_fu.jpg">Rage Fu</option>
+        <option data-img="toons/rainbow_star_pony.jpg">Rainbow Star Pony</option>
+        <option data-img="toons/socially_awkward_penguin.jpg">Socially Awkward Penguin</option>
+        <option data-img="toons/yuno_guy.jpg">Yuno Guy</option>
+        <option data-img="toons/not_sure_if.jpg" selected>Not Sure If</option>
+        <option data-img="toons/whyyyyy.jpg">Whyyyyy</option>
+        <option data-img="toons/my_little_pony_1.jpg">My Little Pony 1</option>
+        <option data-img="toons/okay.jpg">Okay</option>
+        <option data-img="toons/trollface.jpg">Trollface</option>
+        <option data-img="toons/i_hate.jpg">I Hate</option>
+        <option data-img="toons/great_scott.jpg">Great Scott</option>
+        <option data-img="toons/forever_alone.jpg">Forever Alone</option>
+        <option data-img="toons/pedo_bear.jpg">Pedo Bear</option>
+   </optgroup>
+   <optgroup label="People">
+        <option data-img="people/rlemon_smash.jpg">Rlemon Smash</option>
+        <option data-img="people/condescending_wonka.jpg">Condescending Wonka</option>
+        <option data-img="people/ridiculously_photogenic_guy.jpg">Ridiculously Photogenic Guy</option>
+        <option data-img="people/when_i_was_a_kid.jpg">When I Was A Kid</option>
+        <option data-img="people/baby_godfather.jpg">Baby Godfather</option>
+        <option data-img="people/fuck_you_linus.jpg">Fuck You Linus</option>
+        <option data-img="people/not_bad_obamas.jpg">Not Bad Obamas</option>
+        <option data-img="people/geek_reader.jpg">Geek Reader</option>
+        <option data-img="people/first_world_problems.jpg">First World Problems</option>
+        <option data-img="people/rick_rolled.jpg">Rick Rolled</option>
+        <option data-img="people/skeptical_third_world_child.jpg">Skeptical 3rd World Child</option>
+        <option data-img="people/bitch_please_colour.jpg">Bitch Please Colour</option>
+        <option data-img="people/power_ranger_girls.jpg">Power Ranger Girls</option>
+        <option data-img="people/you_dont_say.jpg">You Dont Say</option>
+        <option data-img="people/helicopter_kid.jpg">Helicopter Kid</option>
+        <option data-img="people/yo_dawg.jpg">Yo Daw</option>
+        <option data-img="people/loktarian.jpg">Loktarian</option>
+        <option data-img="people/one_does_not_simply.jpg">One Does Not Simply</option>
+        <option data-img="people/too_tanned_guy.jpg">Too Tanned Guy</option>
+        <option data-img="people/scumbag_steve.jpg">Scumbag Steve</option>
+        <option data-img="people/pissed_off_nun.jpg">Pissed Off Nun</option>
+        <option data-img="people/spirit_fingers.jpg">Spirit Fingers</option>
+        <option data-img="people/hipster_barista.jpg">Hipster Barista</option>
+        <option data-img="people/good_guy_greg.jpg">Good Guy Greg</option>
+        <option data-img="people/chuck_norris.jpg">Chuck Norris</option>
+        <option data-img="people/bear_grylls.jpg">Bear Grylls</option>
+        <option data-img="people/the_most_interesting_man_in_the_world.jpg">The Most Interesting Man In The World</option>
+        <option data-img="people/success_kid.jpg">Success Kid</option>
+        <option data-img="people/my_name_is_earl.jpg">My Name Is Earl</option>
+   </optgroup>
+        <optgroup label="Animals">
+        <option data-img="animals/ice_creme_unicorn.jpg">Ice Creme Unicorn</option>
+        <option data-img="animals/zion_go_seek.jpg">Zion Go Seek</option>
+        <option data-img="animals/projectile_squirt.jpg">Projectile Squirt</option>
+        <option data-img="animals/science_cat.jpg">Science Cat</option>
+        <option data-img="animals/conversational_penguins.jpg">Conversational Penguins</option>
+   </optgroup>
+</select>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="text-top">Top Line</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" id="text-top" placeholder="Top line"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="text-bottom">Bottom Line</label>
+            <div class="controls">
+              <input type="text" class="input-block-level" id="text-bottom" placeholder="Bottom line"/>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Text Color</label>
+            <div class="controls">
+              <input type="color" name="color1" value="#FFFFFF">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Outline Color</label>
+            <div class="controls">
+              <input type="color" name="color2" value="#000000">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="font-size">Font Size</label>
+            <div class="controls">
+              <div class="input-append">
+                <input type="text" value="50" class="span1" id="font-size">
+                <span class="add-on">px</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="outline-size">Outline Size</label>
+            <div class="controls">
+              <div class="input-append">
+                <input type="text" value="2" class="span1" id="outline-size">
+                <span class="add-on">px</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="padding-x">Padding X</label>
+            <div class="controls">
+              <div class="input-append">
+                <input type="text" class="span1" id="padding-x" value="0">
+                <span class="add-on">px</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="padding-y">Padding Y</label>
+            <div class="controls">
+              <div class="input-append">
+                <input type="text" class="span1" id="padding-y" value="4">
+                <span class="add-on">px</span>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <button type="submit" class="btn btn-large btn-block btn-primary" id="generate" title="Generate meme" data-loading-text="Uploading...">Upload to imgur</button>
+          <br>
+          <a href="#" class="pull-right" title="RESET! ALL OF THE THINGS!" id="form-reset">Reset all</a>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  
+  <div class="modal hide fade" id="upload-success">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Upload successful!</h3>
+    </div>
+
+    <div class="modal-body">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="img-directlink">Direct Link</label>
+          <div class="controls">
+            <input type="text" id="img-directlink">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="img-imgurlink">Link</label>
+          <div class="controls">
+            <input type="text" id="img-imgurlink">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <div class="pull-left">
+        <a href="#" class="btn btn-link" id="img-delete">Delete</a>
+      </div>
+      <div class="pull-right">
+        <a href="#" data-dismiss="modal" class="btn btn-info" id="form-reset">Create another meme</a>
+        <a href="#" class="btn btn-primary" id="img-submitreddit">Submit to Reddit</a>
+      </div>
+    </div>
+  </div>
+
+      </div>
+      <div id="push"></div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <hr class="muted">
+        <span class="footer-text muted">made with love by @kuyan, <a href="https://github.com/kuyan/memecap/graphs/contributors">et al.</a></span>
+        <ul class="footer-links pull-right">
+          <li><a href="./legal.html" title="Legal mumbo jumbo">Legal</a></li>
+          <li class="muted">•</li>
+          <li><a href="https://github.com/kuyan/memecap">Github</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.min.js"></script>
+  <script type="text/javascript" src="js/spectrum.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+
+  </body>
+</html>
